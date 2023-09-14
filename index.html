@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troca de Imagem de Gato</title>
+    <style>
+        #cat-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Troca de Imagem de Gato</h1>
+    <p>Clique no botão para carregar uma imagem de gato aleatória:</p>
+    <button id="submit-button">Carregar Imagem de Gato</button>
+    <div>
+        <img id="cat-image" src="https://http.cat/100" alt="Imagem de Gato">
+    </div>
+
+    <script>
+        const catImage = document.getElementById('cat-image');
+        const submitButton = document.getElementById('submit-button');
+
+        submitButton.addEventListener('click', () => {
+            // Gere um número aleatório entre 100 e 599 para obter uma imagem aleatória de gato.
+            const randomStatusCode = Math.floor(Math.random() * 500) + 100;
+            catImage.src = `https://http.cat/${randomStatusCode}`;
+        });
+    </script>
+</body>
+</html>
