@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Troca de Imagem de Gato</title>
+    <title>Imagens HTTP Cat Aleatórias</title>
     <style>
         #cat-image {
             max-width: 100%;
@@ -11,23 +12,36 @@
         }
     </style>
 </head>
+
 <body>
-    <h1>Troca de Imagem de Gato</h1>
-    <p>Clique no botão para carregar uma imagem de gato aleatória:</p>
-    <button id="submit-button">Carregar Imagem de Gato</button>
+    <h1>Imagens HTTP Cat Aleatórias</h1>
+    <button id="load-random-button">Carregar Imagem Aleatória</button>
     <div>
-        <img id="cat-image" src="https://http.cat/100" alt="Imagem de Gato">
+        <img id="cat-image" src="" alt="Imagem HTTP Cat">
     </div>
 
     <script>
         const catImage = document.getElementById('cat-image');
-        const submitButton = document.getElementById('submit-button');
+        const loadRandomButton = document.getElementById('load-random-button');
 
-        submitButton.addEventListener('click', () => {
-            // Gere um número aleatório entre 100 e 599 para obter uma imagem aleatória de gato.
-            const randomStatusCode = Math.floor(Math.random() * 500) + 100;
+        // Array com todos os códigos de status HTTP
+        const httpStatusCodes = [
+            100, 101, 200, 201, 202, 204, 206, 207, 300, 301,
+            302, 303, 304, 305, 307, 400, 401, 402, 403, 404,
+            405, 406, 407, 408, 409, 410, 411, 412, 413, 414,
+            415, 416, 417, 418, 419, 420, 421, 422, 423, 424,
+            425, 426, 429, 431, 444, 450, 500, 502, 503, 504, 506
+        ];
+
+        loadRandomButton.addEventListener('click', () => {
+            // Gere um número aleatório para selecionar um código de status aleatório
+            const randomIndex = Math.floor(Math.random() * httpStatusCodes.length);
+            const randomStatusCode = httpStatusCodes[randomIndex];
+
+            // Atualize a imagem com o URL correspondente ao código de status selecionado
             catImage.src = `https://http.cat/${randomStatusCode}`;
         });
     </script>
 </body>
+
 </html>
