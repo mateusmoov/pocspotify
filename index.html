@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imagens HTTP Cat Aleatórias</title>
+    <title>Imagens HTTP Cat Personalizadas</title>
     <style>
         #cat-image {
             max-width: 100%;
@@ -14,33 +14,33 @@
 </head>
 
 <body>
-    <h1>Imagens HTTP Cat Aleatórias</h1>
-    <button id="load-random-button">Carregar Imagem Aleatória</button>
+    <h1>Imagens HTTP Cat Personalizadas</h1>
+    <label for="custom-status">Insira um código de status HTTP (ex: 404):</label>
+    <input type="text" id="custom-status" placeholder="Digite o código de status">
+    <button id="load-button">Carregar Imagem</button>
     <div>
         <img id="cat-image" src="" alt="Imagem HTTP Cat">
     </div>
 
     <script>
         const catImage = document.getElementById('cat-image');
-        const loadRandomButton = document.getElementById('load-random-button');
+        const customStatusInput = document.getElementById('custom-status');
+        const loadButton = document.getElementById('load-button');
 
-        // Array com todos os códigos de status HTTP
-        const httpStatusCodes = [
-            100, 101, 200, 201, 202, 204, 206, 207, 300, 301,
-            302, 303, 304, 305, 307, 400, 401, 402, 403, 404,
-            405, 406, 407, 408, 409, 410, 411, 412, 413, 414,
-            415, 416, 417, 418, 419, 420, 421, 422, 423, 424,
-            425, 426, 429, 431, 444, 450, 500, 502, 503, 504, 506
-        ];
-
-        loadRandomButton.addEventListener('click', () => {
-            // Gere um número aleatório para selecionar um código de status aleatório
-            const randomIndex = Math.floor(Math.random() * httpStatusCodes.length);
-            const randomStatusCode = httpStatusCodes[randomIndex];
-
-            // Atualize a imagem com o URL correspondente ao código de status selecionado
-            catImage.src = `https://http.cat/${randomStatusCode}`;
+        loadButton.addEventListener('click', () => {
+            const customStatusCode = customStatusInput.value;
+            if (isValidStatusCode(customStatusCode)) {
+                catImage.src = `https://http.cat/${customStatusCode}`;
+            } else {
+                alert("Código de status HTTP inválido. Insira um código de status válido (ex: 404).");
+            }
         });
+
+        // Função para verificar se o código de status é válido (entre 100 e 599)
+        function isValidStatusCode(statusCode) {
+            const parsedStatusCode = parseInt(statusCode, 10);
+            return !isNaN(parsedStatusCode) && parsedStatusCode >= 100 && parsedStatusCode <= 599;
+        }
     </script>
 </body>
 
